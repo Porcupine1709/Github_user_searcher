@@ -11,21 +11,27 @@ class Main extends React.Component {
 
         this.state = {
             isUserFound: '',
-            userInfo: ''
+            userInfo: '',
+            inputValue: ''
         }
     }
 
-    makeRequest(value){
-        let result = FetchUser(value)
+    async makeRequest(value){
+        let result = await FetchUser(value)
         this.setState({
             isUserFound: result.avatar !== undefined,
-            userInfo: result.avatar !== undefined? '': result
+            userInfo: result.avatar === undefined? '': result,
+            inputValue: value
         })
     }
 
     render() {
         let content
-        this.state.isUserFound === ''? content = '' : content = <DisplayUser userFound={this.state.isUserFound} userInfo={this.state.userInfo}/>
+        this.state.isUserFound === '' && this.state.inputValue === ''? content = '' : content = <DisplayUser userFound={this.state.isUserFound} userInfo={this.state.userInfo}/>
+        
+        if(!this.state.isUserFound && this.state.inputValue === '')
+           content = <h2>Type in something...</h2>
+
         return(
             <div style={mainSectionStyle}>
                 <h1>Find GitHub user!</h1>

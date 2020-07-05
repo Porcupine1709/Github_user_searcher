@@ -7,16 +7,16 @@ async function fetchUser(username){
     
     let userData 
     json.message !== 'User not found' ? userData = combineUserInfo(json) : userData = json.message
+    console.log(userData)
     return userData
 }
 
 function combineUserInfo(json){
     let output = {
         avatar: json.avatar_url,
-        name: json.name,
+        name: json.login,
         repos: json.repos_url
     }
-    console.log(output)
     return output
 }
 

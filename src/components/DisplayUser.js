@@ -1,6 +1,7 @@
 import React from 'react'
 import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import User from './User'
 
 class DisplayUser extends React.Component{
     constructor(props){
@@ -9,16 +10,12 @@ class DisplayUser extends React.Component{
 
     render() {
         let whatToDisplay
-        this.props.userFound? whatToDisplay = <div>
-          <img src={this.props.userInfo.avatar}/>
-          <h3>{this.props.userInfo.name}</h3>
-          <p>User's repositories{this.props.userInfo.repos}</p>
-        </div> 
+        this.props.userFound? whatToDisplay = <User userInfo={this.props.userInfo}/>
         : whatToDisplay = <div>
           <h2>No matches</h2>
           <FontAwesomeIcon style={Warning} icon={faExclamationCircle}/>
         </div>
-
+        
         return(
             <div>
                 {whatToDisplay}
